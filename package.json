@@ -1,0 +1,28 @@
+{
+  "name": "markdown-it-mdcat-table",
+  "version": "0.1.1",
+  "description": "",
+  "keywords": [
+    "markdown-it-plugin",
+    "markdown-it",
+    "markdown",
+    "table"
+  ],
+  "repository": "poyonshot/markdown-it-mdcat-table",
+  "license": "MIT",
+  "author": "poyonshot",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^12.0.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "markdown-it": "^12.0.4"
+  }
+}
