@@ -503,19 +503,46 @@ export class MdcatTablePlugin
 }
 
 
-module.exports = function mdcatTablePlugin(md : MarkdownIt, options : MarkdownIt.Options): MarkdownIt {
+export interface Options extends MarkdownIt.Options {
+	enable?: boolean;
+	codeBlockName?: string
+}
+
+
+module.exports = function mdcatTablePlugin(md : MarkdownIt, options : Options): MarkdownIt {
+
+	var defaults = {
+		enable: true,
+		codeBlockName: "mdcat.table",
+	};
+
+	var opts = Object.assign({}, options || {});
+
+	if (opts.enable == null)
+	{
+		opts.enable = defaults.enable;
+	}
+
+	if ((opts.codeBlockName ?? "") === "")
+	{
+		opts.codeBlockName = defaults.codeBlockName;
+	}
+	
 
 	const defaultRender = md.renderer.rules.fence;
 
 	md.renderer.rules.fence = (tokens, idx, options, env, self) => {
 
-		let token = tokens[idx];
-		let info = token.info ? String(token.info).trim() : "";
-
-		if (info === "mdcat.table")
+		if (opts.enable ?? false)
 		{
-			const m = new MdcatTablePlugin(md, options, env);
-			return m.render(token.content);
+			let token = tokens[idx];
+			let info = token.info ? String(token.info).trim() : "";
+	
+			if (info === opts.codeBlockName)
+			{
+				const m = new MdcatTablePlugin(md, options, env);
+				return m.render(token.content);
+			}	
 		}
 
 		return defaultRender?.(tokens, idx, options, env, self).toString() ?? "";

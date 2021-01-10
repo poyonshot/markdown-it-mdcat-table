@@ -12,13 +12,30 @@ npm install markdown-it-mdcat-table --save
 
 ### init
 
-```js
+````js
 var md = require('markdown-it')()
-             .use(require('markdown-it-mdcat-table'));
+        .use(require('markdown-it-mdcat-table'));
 
-var src = '!!!include(header.md)!!!\n\n*your content*\n\n!!!include(footer.md)!!!';
+var src =  '```mdcat.table\n';
+        += '|left  |center|right |\n';
+        += '|:-----|:----:|-----:|\n';
+        += '|      |>     |      |\n';
+        += '|>     |hello |<     |\n';
+        += '|      |<     |      |\n';
+        += '\n';
+        += '# hello\n';
+        += 'Hello World!\n';
+        += '```';
 md.render(src);
-```
+````
+
+### change code block name
+
+````js
+var md = require('markdown-it')()
+        .use(require('markdown-it-mdcat-table'), { 'codeBlockName' : 'yourName'});
+````
+
 
 ## License
 
