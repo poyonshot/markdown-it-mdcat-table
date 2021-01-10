@@ -503,7 +503,7 @@ export class MdcatTablePlugin
 }
 
 
-export default function mdcatTablePlugin(md : MarkdownIt, options : MarkdownIt.Options): MarkdownIt {
+module.exports = function mdcatTablePlugin(md : MarkdownIt, options : MarkdownIt.Options): MarkdownIt {
 
 	const defaultRender = md.renderer.rules.fence;
 
